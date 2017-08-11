@@ -41,7 +41,6 @@ function render_project_card(project) {
     html += '<div class="card-body">';
     html +='<h4 class="card-title">'+project.title+'</h4>';
     html += '<p class="card-text">'+project.description+'</p>';
-    html += '<a href="#" class="btn btn-primary">Go somewhere</a>';
     html += '<p class="card-footer">'+project.expiration+'</p>';                
     html += '</div>';
     html += '</div>';
@@ -55,7 +54,6 @@ function render_provider_card(provider) {
     html += '<div class="card-body">';
     html +='<h4 class="card-title">'+provider.name+'</h4>';
     html += '<p class="card-text">'+provider.motto+'</p>';
-    html += '<a href="#" class="btn btn-primary">Go somewhere</a>';
     html += '</div>';
     html += '</div>';
 return html;
@@ -69,8 +67,8 @@ function render_proposal_card(proposal) {
     html +='<h4 class="card-title">Project: '+proposal.project_name+'</h4>';        
     html +='<h4 class="card-title">Provider: '+proposal.provider_name+'</h4>';
     html += '<p class="card-text">'+proposal.notes+'</p>';
-    html += '<p class="card-text">'+proposal.offer+'</p>';
-    html += '<a href="#" class="btn btn-primary">Go somewhere</a>';
+    html += '<p class="card-text">Offer: $'+proposal.offer+'</p>';
+    html += '<a href="#" class="btn btn-primary">Accept Proposal</a>';
     html += '<p class="card-footer">'+proposal.expiration+'</p>';            
     html += '</div>';
     html += '</div>';
@@ -78,9 +76,17 @@ return html;
 }
 
 function render_database() {
-    $( "#projects" ).html(render_project_card(database.projects[0]));
-    $( "#proposals" ).html(render_proposal_card(database.proposals[0]));
-    $( "#providers" ).html(render_provider_card(database.providers[0]));    
+    database.projects.forEach(x => {
+	$( "#projects" ).append(render_project_card(x));
+    });
+
+    database.proposals.forEach(x => {
+	$( "#proposals" ).append(render_proposal_card(x));	
+    });
+
+    database.providers.forEach(x => {
+	$( "#providers" ).append(render_provider_card(x));	
+    });
 }
   $().ready( render_database() );
   </script>
