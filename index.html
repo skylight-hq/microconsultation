@@ -6,3 +6,81 @@ title: {{ site.name }}
 <div id="home">
   This is a marketplace for small information technology proposals that may fall below the micropurchase threshold.
 </div>
+
+<div class="card-columns">
+    <div id="projects"></div>
+    <div id="proposals"></div>    
+<div id="providers"></div>
+
+   </div>
+
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
+    
+    <script src="./js/jquery-3.2.1.min.js"></script>
+    <script src="./js/popper.js@1.11.1"></script>    
+
+     <script src="./js/bootstrap.min.js"></script>
+    <script src="./datatypes.js"></script>
+    <script src="./database.js"></script>
+
+
+<script>
+
+// implement renderers of these types - two hours
+// implement an ability to accept - two hours
+// implement an ability to add a new proposal - three hours
+// implment archive - two hours
+// create better databases - one hour
+// implement an ability to add a project - two hours
+
+
+function render_project_card(project) {
+    var html = "";
+    html += '<div class="card" style="width: 20rem;">';
+//    html += '<img class="card-img-top" src="..." alt="Card image cap">';
+    html += '<div class="card-body">';
+    html +='<h4 class="card-title">'+project.title+'</h4>';
+    html += '<p class="card-text">'+project.description+'</p>';
+    html += '<a href="#" class="btn btn-primary">Go somewhere</a>';
+    html += '<p class="card-footer">'+project.expiration+'</p>';                
+    html += '</div>';
+    html += '</div>';
+return html;
+}
+
+function render_provider_card(provider) {
+    var html = "";
+    html += '<div class="card" style="width: 20rem;">';
+//    html += '<img class="card-img-top" src="..." alt="Card image cap">';
+    html += '<div class="card-body">';
+    html +='<h4 class="card-title">'+provider.name+'</h4>';
+    html += '<p class="card-text">'+provider.motto+'</p>';
+    html += '<a href="#" class="btn btn-primary">Go somewhere</a>';
+    html += '</div>';
+    html += '</div>';
+return html;
+}
+
+function render_proposal_card(proposal) {
+    var html = "";
+    html += '<div class="card" style="width: 20rem;">';
+//    html += '<img class="card-img-top" src="..." alt="Card image cap">';
+    html += '<div class="card-body">';
+    html +='<h4 class="card-title">Project: '+proposal.project_name+'</h4>';        
+    html +='<h4 class="card-title">Provider: '+proposal.provider_name+'</h4>';
+    html += '<p class="card-text">'+proposal.notes+'</p>';
+    html += '<p class="card-text">'+proposal.offer+'</p>';
+    html += '<a href="#" class="btn btn-primary">Go somewhere</a>';
+    html += '<p class="card-footer">'+proposal.expiration+'</p>';            
+    html += '</div>';
+    html += '</div>';
+return html;
+}
+
+function render_database() {
+    $( "#projects" ).html(render_project_card(database.projects[0]));
+    $( "#proposals" ).html(render_proposal_card(database.proposals[0]));
+    $( "#providers" ).html(render_provider_card(database.providers[0]));    
+}
+  $().ready( render_database() );
+  </script>
