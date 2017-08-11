@@ -64,10 +64,10 @@ function render_proposal_card(proposal) {
     html += '<div class="card" style="width: 20rem;">';
 //    html += '<img class="card-img-top" src="..." alt="Card image cap">';
     html += '<div class="card-body">';
-    html +='<h4 class="card-title">Project: '+proposal.project_name+'</h4>';        
-    html +='<h4 class="card-title">Provider: '+proposal.provider_name+'</h4>';
     html += '<p class="card-text">'+proposal.notes+'</p>';
     html += '<p class="card-text">Offer: $'+proposal.offer+'</p>';
+    html +='<h6 class="card-subtitle mb-2">Project: '+proposal.project_name+'</h6>';        
+    html +='<h6 class="card-subtitle mb-2">Provider: '+proposal.provider_name+'</h6>';
     html += '<a href="#" class="btn btn-primary">Accept Proposal</a>';
     html += '<p class="card-footer">'+proposal.expiration+'</p>';            
     html += '</div>';
