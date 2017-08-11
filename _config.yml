@@ -1,7 +1,7 @@
 # Setup
 title:        Microconsultation Marketplace
 tagline:      An Unsolicited Proposal of Skylight Digital
-baseurl:      ""
+baseurl:      "https://skylight-hq.github.io/microconsultation/"
 paginate:     1
 
 # About/contact
