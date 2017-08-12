@@ -1,16 +1,20 @@
 ---
 layout: default
-title: {{ site.name }}
+title: {{ site.name }} 
 ---
 
 <div id="home">
+  <div class="alert alert-danger" role="alert">
+  <h1>Administrative Interface</h1>    
+</div>
+
   This is a marketplace for small information technology proposals that may fall below the micropurchase threshold.
 </div>
 
 <div class="card-columns">
-    <div id="projects"></div>
-    <div id="proposals"></div>    
-<div id="providers"></div>
+    <div id="projects" width="400px"></div>
+    <div id="proposals" width="100px"></div>    
+<div id="providers" width="100px" ></div>
 
    </div>
 
@@ -26,7 +30,6 @@ title: {{ site.name }}
 
 
 <script>
-
 
 function render_database_subset(projects,proposals,providers) {
     database.projects.forEach(x => {
@@ -44,9 +47,9 @@ function render_database_subset(projects,proposals,providers) {
 
   
 function render_database() {
+    render_focus_on_project(null,database);
 
-    render_database_subset(database.projects,database.proposals,database.providers);
+//    render_database_subset(database.projects,database.proposals,database.providers);
 }
-
-$().ready( render_database() );
+  $().ready( render_database() );
   </script>
