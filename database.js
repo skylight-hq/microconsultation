@@ -19,8 +19,20 @@ var PROPOSAL_KEY = 0;
 // ProposalPublication
 // ProposalAcceptance
 
+var EVENT_TYPE = {
+    ProviderSubmission: 0,
+    ProivderPublication: 1,
+    ProjectCreation: 2,
+    ProposalSubmission: 3,
+    ProposalPublication: 4,
+    ProposalAcceptance: 5,
+    ProposalRemoval: 6,
+    ProviderRemoval: 7,
+    ProjectRemoval: 8            
+}
+
 var event = {
-    type: "ProviderSubmission",
+    etype: "ProviderSubmission",
     object0: null,
     object1: null,
     timestamp:  null
@@ -41,16 +53,28 @@ var status = {
     ACCEPTED: 3
 };
 
+function publish_event(etype,o1 = null,o2 = null) {
+    var timestamp = new Date();
+    var e = {etype: etype,
+	     object0: o1,
+	     object1: o2,
+	     timestamp: timestamp
+	    };
+    Archive.push(e);
+}
+
 // In a sense, this represents the main API of this entire application
 function submitProvider(p) {
     var key = PROVIDER_KEY++;
     p.status = status.UNPUBLISHED;
     p.key = key;
     database.providers[key] = p;
+    publish_event(EVENT_TYPE.ProviderSubmission,p);
 }
 
 function publishProvider(p) {
-    
+    p.status = status.PUBLISHED;
+    publish_event(EVENT_TYPE.ProviderPublication);
 }
 
 function createProject(p) {
@@ -58,6 +82,7 @@ function createProject(p) {
     p.status = status.PUBLISHED;    
     p.key = key;
     database.projects[key] = p;
+    publish_event(EVENT_TYPE.ProjectCreation,p);    
 }
 
 function submitProposal(prop,proj,prov) {
@@ -67,26 +92,32 @@ function submitProposal(prop,proj,prov) {
     prop.project = proj;
     prop.provider = prov;
     database.proposals[key] = prop;
+    publish_event(EVENT_TYPE.ProposalSubmission,prop);        
 }
 
 function publishProposal(p) {
     p.status = status.PUBLISHED;
+    publish_event(EVENT_TYPE.ProposalPublication);
 }
 
 function acceptProposal(p) {
     p.status = status.ACCEPTED;
+    publish_event(EVENT_TYPE.ProposalAcceptance);    
 }
 
 function removeProposal(p) {
-    p.status = status.REMOVED;    
+    p.status = status.REMOVED;
+    publish_event(EVENT_TYPE.ProposalRemoval);        
 }
 
 function removeProvider(p) {
-    p.status = status.REMOVED;        
+    p.status = status.REMOVED;
+    publish_event(EVENT_TYPE.ProviderRemoval);            
 }
 
 function removeProject(p) {
-    p.status = status.REMOVED;        
+    p.status = status.REMOVED;
+    publish_event(EVENT_TYPE.ProjectRemoval);                
 }
 
 
