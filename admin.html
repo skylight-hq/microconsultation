@@ -28,28 +28,27 @@ title: {{ site.name }}
     <script src="./database.js"></script>
     <script src="./gui_common.js"></script>    
 
-
 <script>
 
-function render_database_subset(projects,proposals,providers) {
+
+function render_database_subset(projects,proposals,providers,options) {
     database.projects.forEach(x => {
-	$( "#projects" ).append(render_project_card(x));
+	$( "#projects" ).append(render_project_card(x),options);
     });
 
     database.proposals.forEach(x => {
-	$( "#proposals" ).append(render_proposal_card(x));	
+	$( "#proposals" ).append(render_proposal_card(x),options);	
     });
 
     database.providers.forEach(x => {
-	$( "#providers" ).append(render_provider_card(x));	
+	$( "#providers" ).append(render_provider_card(x),options);	
     });
 }
 
   
 function render_database() {
-    render_focus_on_project(null,database);
-
-//    render_database_subset(database.projects,database.proposals,database.providers);
+    var options = { SHOW_ACCEPT: true };    
+    render_database_subset(database.projects,database.proposals,database.providers,options);
 }
   $().ready( render_database() );
   </script>

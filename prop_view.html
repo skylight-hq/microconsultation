@@ -1,0 +1,65 @@
+---
+layout: default
+title: {{ site.name }}
+---
+
+<div class="row">
+  <div id="project" class="col-3">
+    <h2 style="text-align: center">Project</h2>
+    </div>
+    <div id="proposal" class="col-6">
+    <h2 style="text-align: center">Proposal</h2>    
+    </div>
+    <div id="provider" class="col-3">
+    <h2 style="text-align: center">Provider</h2>        
+    </div>
+    </div>
+
+<div class="row">
+  <div id="project" class="col-3">
+    
+    </div>
+  <div id="proposal" class="col-6">
+    
+    </div>
+  <div id="provider" class="col-3">
+    
+    </div>
+    </div>
+
+
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
+    
+    <script src="./js/jquery-3.2.1.min.js"></script>
+    <script src="./js/popper.js@1.11.1"></script>    
+
+     <script src="./js/bootstrap.min.js"></script>
+    <script src="./datatypes.js"></script>
+    <script src="./database.js"></script>
+    <script src="./gui_common.js"></script>    
+
+
+<script>
+
+
+function render_proposal_view(proposal,project,provider,options) {
+    $( "#project" ).append(render_project(project,options));
+
+    $( "#proposal" ).append(render_proposal(proposal,options));	
+
+    $( "#provider" ).append(render_provider(provider,options));	
+}
+
+  
+function render_database() {
+    const proj = database.projects[0];
+    const prop = database.proposals[0];
+    const prov = database.providers[0];    
+    var options = { SHOW_ACCEPT: true };        
+    render_proposal_view(prop,proj,prov,options);
+}
+
+$().ready( render_database() );
+  </script>
+
+

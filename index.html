@@ -23,29 +23,30 @@ title: {{ site.name }}
     <script src="./datatypes.js"></script>
     <script src="./database.js"></script>
     <script src="./gui_common.js"></script>    
-
-
 <script>
 
 
 function render_database_subset(projects,proposals,providers) {
     database.projects.forEach(x => {
-	$( "#projects" ).append(render_project_card(x));
+	if (x.status == status.PUBLISHED)
+	    $( "#projects" ).append(render_project_card(x));
     });
 
     database.proposals.forEach(x => {
-	$( "#proposals" ).append(render_proposal_card(x));	
+	if (x.status == status.PUBLISHED)	
+	    $( "#proposals" ).append(render_proposal_card(x));	
     });
 
     database.providers.forEach(x => {
-	$( "#providers" ).append(render_provider_card(x));	
+	if (x.status == status.PUBLISHED)	
+	    $( "#providers" ).append(render_provider_card(x));	
     });
 }
 
   
 function render_database() {
-
-    render_database_subset(database.projects,database.proposals,database.providers);
+    var options = { SHOW_ACCEPT: false };        
+    render_database_subset(database.projects,database.proposals,database.providers,options);
 }
 
 $().ready( render_database() );
