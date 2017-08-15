@@ -45,9 +45,39 @@ function render_database_subset(projects,proposals,providers) {
 
   
 function render_database() {
-    var options = { SHOW_ACCEPT: false };        
+    var options = { SHOW_ACCEPT: true };        
     render_database_subset(database.projects,database.proposals,database.providers,options);
 }
 
-$().ready( render_database() );
+function add_provider_creation() {
+    $( "#providers" ).append(render_provider_input_card());
+    $("#createnewprovider").click(create_new_provider);    
+}
+
+var local_database;
+
+function init() {
+    $("#createnewprovider").click(create_new_provider);
+    if (typeof(Storage) !== "undefined") {
+	// Code for localStorage/sessionStorage.
+	if (localStorage.getItem("skylightdatabase") === null) {
+	    clear_database_and_archive();
+	    standard_init();
+	} else {
+	    database  = JSON.parse(localStorage.getItem("skylightdatabase"));
+	    Archive  = JSON.parse(localStorage.getItem("skylightarchive"));	    	    
+	}
+	render_database();
+	add_provider_creation();
+    } else {
+	// Sorry! No Web Storage support..	
+	alert("This browser does not support local storage, which is essential for our demo."); 
+    }
+	
+}
+
+
+$().ready(
+    init()
+);
   </script>

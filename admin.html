@@ -16,7 +16,12 @@ title: {{ site.name }}
     <div id="proposals" width="100px"></div>    
 <div id="providers" width="100px" ></div>
 
-   </div>
+</div>
+
+<div>
+    <button type="button" id="resetdata" class="btn btn-primary">Reset Data to Default</button>
+    </div>
+
 
     <link href="./css/bootstrap.min.css" rel="stylesheet">
     
@@ -50,5 +55,38 @@ function render_database() {
     var options = { SHOW_ACCEPT: true };    
     render_database_subset(database.projects,database.proposals,database.providers,options);
 }
-  $().ready( render_database() );
+
+function reset_local_storage() {
+    clear_database();
+    standard_init();
+    render_database();
+    localStorage.setItem("skylightdatabase",JSON.stringify(database));
+    localStorage.setItem("skylightarchive",JSON.stringify(Archive));
+}
+
+function init() {
+    $( "#resetdata" ).click(reset_local_storage);
+    
+    if (typeof(Storage) !== "undefined") {
+	// Code for localStorage/sessionStorage.
+	if (localStorage.getItem("skylightdatabase") === null) {
+	    clear_database_and_archive();
+	    standard_init();
+	} else {
+	    database  = JSON.parse(localStorage.getItem("skylightdatabase"));
+	    Archive  = JSON.parse(localStorage.getItem("skylightarchive"));	    	    
+	}
+	render_database();
+	add_provider_creation();	
+
+    } else {
+	// Sorry! No Web Storage support..	
+	alert("This browser does not support local storage, which is essential for our demo.");
+    }
+
+
+
+}
+
+$().ready( init() );
   </script>

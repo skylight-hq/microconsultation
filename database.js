@@ -1,12 +1,5 @@
 
 
-var projects = [];
-var PROJECT_KEY = 0;
-var providers = [];
-var PROVIDER_KEY = 0;
-var proposals = [];
-var PROPOSAL_KEY = 0;
-
 
 
 // The archive contains a series of events;
@@ -40,11 +33,30 @@ var event = {
 
 var Archive = [];
 
+
+var projects = [];
+var PROJECT_KEY = 0;
+var providers = [];
+var PROVIDER_KEY = 0;
+var proposals = [];
+var PROPOSAL_KEY = 0;
+
+
 var database = {
      projects: [],
      providers: [],
      proposals: []
- };
+};
+
+function clear_database_and_archive() {
+    database.projects = [];
+    PROJECT_KEY = 0;
+    database.providers = [];
+    PROVIDER_KEY = 0;    
+    database.proposals = [];
+    PROPOSAL_KEY = 0;
+    Archive = [];
+}
 
 var status = {
     UNPUBLISHED : 0,
@@ -52,6 +64,8 @@ var status = {
     REMOVED : 2,
     ACCEPTED: 3
 };
+
+
 
 function publish_event(etype,o1 = null,o2 = null) {
     var timestamp = new Date();
@@ -61,6 +75,8 @@ function publish_event(etype,o1 = null,o2 = null) {
 	     timestamp: timestamp
 	    };
     Archive.push(e);
+    localStorage.setItem("skylightdatabase",JSON.stringify(database));
+    localStorage.setItem("skylightarchive",JSON.stringify(Archive));            
 }
 
 // In a sense, this represents the main API of this entire application
@@ -86,7 +102,7 @@ function createProject(p) {
 }
 
 function submitProposal(prop,proj,prov) {
-    var key = PROJECT_KEY++;
+    var key = PROPOSAL_KEY++;
     prop.status = status.UNPUBLISHED;        
     prop.key = key;
     prop.project = proj;

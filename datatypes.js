@@ -1,6 +1,9 @@
 var projects = [];
+var PROJECT_KEY = 0;
 var providers = [];
+var PROVIDER_KEY = 0;
 var proposals = [];
+var PROPOSAL_KEY = 0;
 
 projects[0] = { client_id: 0,
 		title: "Antibiotic resistant bacteria information website",
