@@ -73,7 +73,12 @@ function init() {
 	    clear_database_and_archive();
 	    standard_init();
 	} else {
-	    database  = JSON.parse(localStorage.getItem("skylightdatabase"));
+	    database = JSON.parse(localStorage.getItem("skylightdatabase"));
+	    PROJECT_KEY = database.projects.length;
+	    PROVIDER_KEY = database.providers.length;
+	    PROPOSAL_KEY = database.proposals.length;
+	    
+	    console.log("Read database:",database);
 	    Archive  = JSON.parse(localStorage.getItem("skylightarchive"));	    	    
 	}
 	render_database();

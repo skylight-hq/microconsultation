@@ -27,7 +27,6 @@ return html;
 }
 
 function create_new_provider() {
-    alert("xxx");
     var name =  $("#newprovidername").val();
     var motto =  $("#newprovidermotto").val();
     var provider = {client_id: 2,

@@ -75,7 +75,9 @@ function publish_event(etype,o1 = null,o2 = null) {
 	     timestamp: timestamp
 	    };
     Archive.push(e);
+    console.log("XXX",database);    
     localStorage.setItem("skylightdatabase",JSON.stringify(database));
+    console.log(JSON.parse(localStorage.getItem("skylightdatabase")));
     localStorage.setItem("skylightarchive",JSON.stringify(Archive));            
 }
 
@@ -206,4 +208,3 @@ function standard_init() {
 }
 
 
-standard_init();
