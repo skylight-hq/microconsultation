@@ -35,7 +35,7 @@ function create_new_provider() {
 		   };
 
     submitProvider(provider);    
-    
+    location.reload(); 
 }
 
 function render_provider_input_card(options) {

@@ -52,16 +52,18 @@ function render_database_subset(projects,proposals,providers,options) {
 
   
 function render_database() {
-    var options = { SHOW_ACCEPT: true };    
+    var options = { SHOW_ACCEPT: true };
     render_database_subset(database.projects,database.proposals,database.providers,options);
 }
 
 function reset_local_storage() {
-    clear_database();
+    clear_database_and_archive();
     standard_init();
     render_database();
     localStorage.setItem("skylightdatabase",JSON.stringify(database));
     localStorage.setItem("skylightarchive",JSON.stringify(Archive));
+    location.reload(); 
+
 }
 
 function init() {
