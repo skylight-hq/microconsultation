@@ -38,6 +38,23 @@ function create_new_provider() {
     location.reload(); 
 }
 
+function create_new_project() {
+    var title = $("#newprojecttitle").val();
+    var description = $("#newprojectdescription").val();
+    var reward = $("#newprojectreward").val();
+    var expiration = $("#newprojectexpiration").val();
+    
+    var project = {client_id: 2,
+		   title: title,
+		   description: description,
+		   reward_guidance: reward,
+		   expiration: expiration
+		   };
+
+    createProject(project);    
+    location.reload(); 
+}
+
 function render_provider_input_card(options) {
     var width = options ? (options.width ? options.width : "20rem") : "20rem";    
     var html = "";
@@ -50,6 +67,27 @@ function render_provider_input_card(options) {
     html += '<p class="card-text">Motto: </p>';
     html += '<input type="text" id="newprovidermotto"></input>';
     html += '<button type="button" id="createnewprovider" class="btn btn-primary">Create New Provider</button>';
+    html += '</div>';
+    html += '</div>';
+return html;
+}
+
+function render_project_input_card(options) {
+    var width = options ? (options.width ? options.width : "20rem") : "10rem";    
+    var html = "";
+    html += '<div class="card" style="width: '+width+';">';    
+    html += '<div class="card-body">';
+    
+    html +='<h4 class="card-title">Title:';
+    html += '<input type="text" id="newprojecttitle" size="10"></input>';
+    html += '</h4>';
+    html += '<p class="card-text">Description: </p>';
+    html += '<input type="text" id="newprojectdescription"></input>';
+    html += '<p class="card-text">Reward: </p>';
+    html += '<input type="text" id="newprojectreward"></input>';
+    html += '<p class="card-text">Expiration: </p>';
+    html += '<input type="text" id="newprojectexpiration"></input>';
+    html += '<button type="button" id="createnewproject" class="btn btn-primary">Create New Project</button>';
     html += '</div>';
     html += '</div>';
 return html;
@@ -136,4 +174,8 @@ function render_focus_on_provider(p,database) {
 function add_provider_creation() {
     $( "#providers" ).append(render_provider_input_card());
     $("#createnewprovider").click(create_new_provider);    
+}
+function add_project_creation() {
+    $( "#projects" ).append(render_project_input_card());
+    $("#createnewproject").click(create_new_project);    
 }

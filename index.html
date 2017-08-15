@@ -10,9 +10,8 @@ title: {{ site.name }}
 <div class="card-columns">
     <div id="projects"></div>
     <div id="proposals"></div>    
-<div id="providers"></div>
-
-   </div>
+    <div id="providers"></div>
+</div>
 
     <link href="./css/bootstrap.min.css" rel="stylesheet">
     
@@ -52,6 +51,11 @@ function render_database() {
 function add_provider_creation() {
     $( "#providers" ).append(render_provider_input_card());
     $("#createnewprovider").click(create_new_provider);    
+}
+
+function add_project_creation() {
+    $( "#projects" ).append(render_project_input_card());
+    $("#createnewproject").click(create_new_project);    
 }
 
 var local_database;

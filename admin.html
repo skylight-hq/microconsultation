@@ -12,10 +12,9 @@ title: {{ site.name }}
 </div>
 
 <div class="card-columns">
-    <div id="projects" width="400px"></div>
-    <div id="proposals" width="100px"></div>    
-<div id="providers" width="100px" ></div>
-
+    <div id="projects"></div>
+    <div id="proposals"></div>    
+    <div id="providers"></div>
 </div>
 
 <div>
@@ -84,7 +83,8 @@ function init() {
 	    Archive  = JSON.parse(localStorage.getItem("skylightarchive"));	    	    
 	}
 	render_database();
-	add_provider_creation();	
+	add_project_creation();
+//	add_provider_creation();	
 
     } else {
 	// Sorry! No Web Storage support..	
